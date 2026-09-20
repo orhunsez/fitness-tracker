@@ -1,0 +1,7 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Caacupe+One&display=swap'); /* google font*/
+@import "tailwindcss";
+
+*{
+    font-family: 'Caacupe One', sans-serif;
+}
