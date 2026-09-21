@@ -1,4 +1,45 @@
 
-import { createContext } from "react";
-import { initialState } from "../types";
+import React, { createContext, useContext, useState } from "react";
+import { initialState, type ActivityEntry, type Credentials, type FoodEntry } from "../types";
+import { useNavigate } from "react-router-dom";
+import mockApi from "../assets/mockApi";
 
+const AppContext = createContext(initialState)
+
+export const AppProvider = ({children} : {children : React.ReactNode})=> {
+
+    const navigate = useNavigate()
+    const [user, setUser] = useState<User>(null)
+    const [isUserFetched, setIsUserFetched] = useState(false)
+    const [onboardingCompleted, setOnboardingCompleted] = useState(false)
+    const [allFoodLogs, setAllFoodLogs] = useState<FoodEntry>([])
+    const [allActivityLogs, setAllActivityLogs] = useState<ActivityEntry>([])
+
+    // Signup Function
+    const signup = async (credentials : Credentials)=>{
+        const {data}  = await mockApi.auth.register(credentials)
+        setUser(data.user)
+        if (data?.user?.age && data?.user?.weight && data?.user?.goal) {
+            setOnboardingCompleted(true)
+        }
+        localStorage.setItem('token', data.jwt)
+    }
+
+    //Login Function
+    const login = async (credentials : Credentials)=>{
+        const {data} = await mockApi.auth.login(credentials)
+        setUser({...data.user, token: data.jwt})
+        if (data?.user?.age && data?.user?.weight && data?.user?.goal) {
+            setOnboardingCompleted(true)
+        }
+        localStorage.setItem('token', data.jwt)
+    }
+
+    const value = {}
+
+    return <AppContext.Provider value={value}>
+        {children}
+    </AppContext.Provider>
+}
+
+export const useAppContext = ()=> useContext(AppContext)
