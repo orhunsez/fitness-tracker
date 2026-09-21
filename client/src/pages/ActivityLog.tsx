@@ -1,7 +1,9 @@
 
 const ActivityLog = () => {
   return (
-    <div>activity log</div>
+    <div>
+      Activity Log
+    </div>
   )
 }
 

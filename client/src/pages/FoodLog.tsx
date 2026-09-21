@@ -1,7 +1,9 @@
 
 const FoodLog = () => {
   return (
-    <div>FoodLog</div>
+    <div>
+      FoodLog
+    </div>
   )
 }
 

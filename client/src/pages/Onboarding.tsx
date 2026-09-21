@@ -2,7 +2,9 @@
 
 const Onboarding  = () => {
   return (
-    <div>Onboarding </div>
+    <div>
+      Onboarding
+    </div>
   )
 }
 

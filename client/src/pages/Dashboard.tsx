@@ -1,9 +1,11 @@
 
 
-const ComponentName = () => {
+const Dashboard = () => {
   return (
-    <div>first</div>
+    <div>
+      Dashboard
+    </div>
   )
 }
 
-export default ComponentName
+export default Dashboard
